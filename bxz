@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# depencies = xxd awk xz
+# process:
+# 	1. convert to hexdump
+# 	2. use ascii chars to reduce from 2B to 1B
+# 	3. put it into a file, there will be 4 lines of information: 1st 3 line are divisions, 4th line is linker
+# 	4. compress the file into xz
+# 	5. Done!
+
+if [[ "$1" = "-z" ]]
+then
+	#./compress
+	echo worked 1
+	xxd -g1 $2 | cut -d ' ' -f 2-17 > /tmp/hd
+	echo worked 2
+	~/projects/binxr/map
+	echo worked 3
+	xz -z /tmp/hd 
+	echo worked 4
+	mv /tmp/hd.xz $2.bxz
+
+else
+	echo u have entered in decompression
+	#./decompress
+	#./mapper something here
+fi
+
+
